@@ -63,26 +63,29 @@ const dog = async () => {
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
 //
 
-// const joke = async () => {
-//     const answer = await fetch('jokes', 'answer');
-//     const question = await fetch('jokes', 'question');
-//     const thisJoke = {
-//         question: question,
-//         answer: answer
-//     };
-//     return { thisJoke };
-// };
-
-const joke = () => {
-    const thisJoke = { question: '', answer: '' };
-    fetch('jokes', 'question').then((response) => {
-        thisJoke.question = response.joke;
-    });
-    fetch('jokes', 'answer').then((response) => {
-        thisJoke.answer = response.answer;
-    });
+const joke = async () => {
+    const thisAnswer = await fetch('jokes', 'answer');
+    const thisQuestion = await fetch('jokes', 'question');
+    const thisJoke = {
+        question: '',
+        answer: ''
+    };
+    thisJoke.question = thisQuestion.joke;
+    thisJoke.answer = thisAnswer.answer;
     return thisJoke;
 };
+
+// ALT METHOD:
+// const joke = () => {
+//     const thisJoke = { question: '', answer: '' };
+//     fetch('jokes', 'question').then((response) => {
+//         thisJoke.question = response.joke;
+//     });
+//     fetch('jokes', 'answer').then((response) => {
+//         thisJoke.answer = response.answer;
+//     });
+//     return thisJoke;
+// };
 
 module.exports = {
     food,
